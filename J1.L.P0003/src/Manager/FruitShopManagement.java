@@ -35,7 +35,7 @@ public class FruitShopManagement {
                 //View Orders
                 break;
             case 3:
-                //Shopping
+                startShopping();
                 break;
             case 4:
                 //Exit
@@ -58,4 +58,36 @@ public class FruitShopManagement {
             CreateTable();
         }
     }
+
+    private void startShopping() {
+        displayFruitTable();
+        int fruitID = input.handleShopping();
+        Fruit fruit = fruitList.get(fruitID - 1);
+        System.out.println("You selected: " + fruit.getFruitName());
+        System.out.println("Enter quantity: ");
+        int quantity = input.handleQuantity();
+        input.handleOrder();
+    }
+
+    private void displayFruitTable() {
+        if (fruitList.isEmpty()) {
+            System.out.println("There is no fruit in the store!");
+            return;
+        }
+        System.out.println("List of Fruit: ");
+        String tableHeader = "No., Fruit Name     , Origin   , Price , Quantity";
+        table.createTH(tableHeader.split(", "));
+        for (Fruit i: fruitList) {
+            table.createTB(tableHeader.split(", "), new String[] {
+                    i.getFruitID() + "",
+                    i.getFruitName(),
+                    i.getOrigin(),
+                    i.getPrice() + "",
+                    i.getQuantity() + ""
+            });
+            table.createTF(tableHeader.split(", "));
+        }
+        System.out.print("Please enter the fruit ID you want to buy: ");
+    }
+
 }
