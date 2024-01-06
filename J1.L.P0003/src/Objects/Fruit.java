@@ -24,21 +24,22 @@ public class Fruit {
     }
 
     public void createFruit() {
+        Validation validation = new Validation();
         Scanner sc = new Scanner(System.in);
         System.out.println("Enter fruit name please: ");
         do {
             try {
                 String fruitName = sc.nextLine().trim();
-                if (!Validation.isValidFruitName(fruitName)) {
+                if (!validation.isValidFruitName(fruitName)) {
                     System.out.println("Fruit name must be at least 2 characters and not contain any number!");
                     System.out.println("Enter fruit name please: ");
-                } else if (Validation.isDuplicatedFruitName(fruitName)) {
+                } else if (validation.isDuplicatedFruitName(fruitName)) {
                     System.out.println("Fruit name must be unique!");
                     System.out.println("Enter fruit name please: ");
                 } else {
                     if (fruitName.length() > 7) {
                         fruitName = FormatManagement.TrimAndUpperCaseFirstLetter(fruitName);
-                        if (Validation.isDuplicatedFruitName(fruitName)) {
+                        if (validation.isDuplicatedFruitName(fruitName)) {
                             System.out.println("Fruit name must be unique!");
                             System.out.println("Enter fruit name please: ");
                             continue;
@@ -46,7 +47,7 @@ public class Fruit {
                     }
                     fruitName = FormatManagement.UpperCaseFirstLetter(fruitName);
                     this.fruitName = fruitName;
-                    Validation.setFruitNameSet(fruitName);
+                    validation.setFruitNameSet(fruitName);
                     break;
                 }
             } catch (Exception e) {
@@ -57,7 +58,7 @@ public class Fruit {
         do {
             try {
                 int price = Integer.parseInt(sc.nextLine().trim());
-                if (Validation.isValidPrice(price)) {
+                if (validation.isValidPrice(price)) {
                     System.out.println("Price must be a positive number!");
                     System.out.println("Enter fruit price please: ");
                 } else {
@@ -72,7 +73,7 @@ public class Fruit {
         do {
             try {
                 int quantity = Integer.parseInt(sc.nextLine().trim());
-                if (!Validation.isValidQuantity(quantity)) {
+                if (!validation.isValidQuantity(quantity)) {
                     System.out.println("Quantity must be a positive number!");
                     System.out.println("Enter fruit quantity please: ");
                 } else {
@@ -87,7 +88,7 @@ public class Fruit {
         do {
             try {
                 String origin = sc.nextLine().trim();
-                if (!Validation.isValidOrigin(origin)) {
+                if (!validation.isValidOrigin(origin)) {
                     System.out.println("Origin must be at least 2 characters and not contain any number!");
                     System.out.println("Enter fruit origin please: ");
                 } else {

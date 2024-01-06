@@ -1,15 +1,18 @@
 package Manager;
 
 //import Input.InputManagement;
+import Input.InputManagement;
 import Objects.Fruit;
 import Table.CustomTable;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class FruitShopManagement {
     private ArrayList<Fruit> fruitList;
     private final String MenuOption = "Create Fruit, View Orders, Shopping (for buyer), Exit";
     private CustomTable table = new CustomTable();
+    private InputManagement input = new InputManagement();
 
     public FruitShopManagement() {
         fruitList = new ArrayList<>();
@@ -48,5 +51,11 @@ public class FruitShopManagement {
         fruit.setFruitID(fruitID);
         fruit.createFruit();
         fruitList.add(fruit);
+        if (Objects.equals(input.handleOrder(), "Y")) {
+            createFruit();
+        }
+        else {
+            CreateTable();
+        }
     }
 }
