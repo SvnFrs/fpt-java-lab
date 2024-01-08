@@ -31,7 +31,7 @@ public class FruitShopManagement {
     private void handleChoices(int option) {
         switch (option) {
             case 1:
-                createFruit();
+                CreateFruit();
                 break;
             case 2:
                 //View Orders
@@ -47,14 +47,14 @@ public class FruitShopManagement {
         }
     }
 
-    private void createFruit() {
+    private void CreateFruit() {
         int fruitID = fruitList.size() + 1;
         Fruit fruit = new Fruit();
         fruit.setFruitID(fruitID);
         fruit.createFruit();
         fruitList.add(fruit);
         if (Objects.equals(input.handleOrder(), "Y")) {
-            createFruit();
+            CreateFruit();
         }
         else {
             CreateTable();
@@ -72,7 +72,18 @@ public class FruitShopManagement {
             tableManagement.displayFruitTable(fruitList);
         }
         else {
-            tableManagement.CreateOrder();
+            CreateOrder();
         }
+    }
+
+    public void CreateOrder() {
+        String tableHeader = "Product     , Quantity   , Price , Amount";
+        table.createTH(tableHeader.split(", "));
+        table.createTB(tableHeader.split(", "), new String[] {
+                "Apple",
+                "2",
+                "10$",
+                "20$"
+        });
     }
 }
