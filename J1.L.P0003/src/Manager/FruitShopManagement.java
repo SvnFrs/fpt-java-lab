@@ -64,9 +64,14 @@ public class FruitShopManagement {
         int fruitID = input.handleShopping();
         Fruit fruit = fruitList.get(fruitID - 1);
         System.out.println("You selected: " + fruit.getFruitName());
-        System.out.println("Enter quantity: ");
         int quantity = input.handleQuantity();
-        input.handleOrder();
+        if (Objects.equals(input.handleOrder(), "Y")) {
+            // save order
+            displayFruitTable();
+        }
+        else {
+            CreateOrder();
+        }
     }
 
     private void displayFruitTable() {
@@ -82,12 +87,23 @@ public class FruitShopManagement {
                     i.getFruitID() + "",
                     i.getFruitName(),
                     i.getOrigin(),
-                    i.getPrice() + "",
+                    i.getPrice() + "$" + "",
                     i.getQuantity() + ""
             });
             table.createTF(tableHeader.split(", "));
         }
-        System.out.print("Please enter the fruit ID you want to buy: ");
+//        System.out.print("Please enter the fruit ID you want to buy: ");
+    }
+
+    private void CreateOrder() {
+        String tableHeader = "Product     , Quantity   , Price , Amount";
+        table.createTH(tableHeader.split(", "));
+        table.createTB(tableHeader.split(", "), new String[] {
+                "Apple",
+                "2",
+                "10$",
+                "20$"
+        });
     }
 
 }
