@@ -24,6 +24,15 @@ public class TableManagement {
             });
             table.createTF(tableHeader.split(", "));
         }
-//        System.out.print("Please enter the fruit ID you want to buy: ");
+    }
+    public void CreateOrder() {
+        String tableHeader = "Product     , Quantity   , Price , Amount";
+        table.createTH(tableHeader.split(", "));
+        table.createTB(tableHeader.split(", "), new String[] {
+                "Apple",
+                "2",
+                "10$",
+                "20$"
+        });
     }
 }
