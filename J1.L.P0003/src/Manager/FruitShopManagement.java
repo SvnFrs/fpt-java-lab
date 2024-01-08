@@ -4,6 +4,7 @@ package Manager;
 import Input.InputManagement;
 import Objects.Fruit;
 import Table.CustomTable;
+import Table.TableManagement;
 
 import java.util.ArrayList;
 import java.util.Objects;
@@ -12,6 +13,7 @@ public class FruitShopManagement {
     private ArrayList<Fruit> fruitList;
     private final String MenuOption = "Create Fruit, View Orders, Shopping (for buyer), Exit";
     private CustomTable table = new CustomTable();
+    private TableManagement tableManagement = new TableManagement();
     private InputManagement input = new InputManagement();
 
     public FruitShopManagement() {
@@ -60,39 +62,18 @@ public class FruitShopManagement {
     }
 
     private void startShopping() {
-        displayFruitTable();
+        tableManagement.displayFruitTable(fruitList);
         int fruitID = input.handleShopping();
         Fruit fruit = fruitList.get(fruitID - 1);
         System.out.println("You selected: " + fruit.getFruitName());
         int quantity = input.handleQuantity();
         if (Objects.equals(input.handleOrder(), "Y")) {
             // save order
-            displayFruitTable();
+            tableManagement.displayFruitTable(fruitList);
         }
         else {
             CreateOrder();
         }
-    }
-
-    private void displayFruitTable() {
-        if (fruitList.isEmpty()) {
-            System.out.println("There is no fruit in the store!");
-            return;
-        }
-        System.out.println("List of Fruit: ");
-        String tableHeader = "No., Fruit Name     , Origin   , Price , Quantity";
-        table.createTH(tableHeader.split(", "));
-        for (Fruit i: fruitList) {
-            table.createTB(tableHeader.split(", "), new String[] {
-                    i.getFruitID() + "",
-                    i.getFruitName(),
-                    i.getOrigin(),
-                    i.getPrice() + "$" + "",
-                    i.getQuantity() + ""
-            });
-            table.createTF(tableHeader.split(", "));
-        }
-//        System.out.print("Please enter the fruit ID you want to buy: ");
     }
 
     private void CreateOrder() {
